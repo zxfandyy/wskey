@@ -1,8 +1,19 @@
 
 ### 更新 · 摘要
+
+#### Version 2022-02-02 新年快乐
+
+---
+**2022年2月2日 16:51:42**
+- **更新10.3.5接口**
+- **新增`WSKEY_AUTO_DISABLE`变量 设置后不会自动禁用Cookie**
+- **支持按间隔更新CK 参数 `export WSKEY_UPDATE_HOUR="间隔（单位：时）" `**
+- **增加自动重试 参数 `export WSKEY_TRY_COUNT="次数" `**
+- **优化getToken获取失败提示**
+- **移除部分冗余代码**
 ---
 **2022年1月22日 11:19:41**
-- **镜像地址 `https://e.coding.net/HelloDNS/sign/wskey.git`**
+- **镜像地址 `https://hellodns.coding.net/public/sign/wskey/git/files`**
 - **`ql repo https://e.coding.net/HelloDNS/sign/wskey.git "wskey"`**
 ---
 **2022年1月14日 09:04:19**
@@ -164,35 +175,40 @@
 
 ------------
 
-**完美网络用户** **`ql repo https://github.com/Zy143L/wskey.git "wskey"`**
+**原版地址** **`ql repo https://github.com/Zy143L/wskey.git "wskey"`**
 
-**国内网络用户 `ql repo https://e.coding.net/HelloDNS/sign/wskey.git "wskey"`**
+**镜像地址 `ql repo https://e.coding.net/HelloDNS/sign/wskey.git "wskey"`**
 
-**使用建议 修改定时计划 `15 */8 * * *`  默认为~~8小时15分~~执行一次 请按需修改**
+**使用建议 修改定时计划 `15 */8 * * *`  ~~默认为8小时15分执行一次~~ 请按需修改**
 
 ----------
 ### 变量声明
 
 ```shell
-变量名: JD_WSCK 参数: pin=xxxx;wskey=xxxx; # 注意分号 不要用中文分号!
-变量名: QL_PORT 参数: 端口号(int值) 	 		# 修改过面板端口的人才需要填写 默认5700 
-# 是本地的端口 不是Docker映射出去的端口! 如果你映射参数是 8888:5700 仍然填写5700
-变量名: QL_WSCK 参数: 任意(str值)	  		 # 设置QL_WSCK变量后 不检查有效性 直接更新 不使用请删除 而不是禁用
+变量名: JD_WSCK 参数: pin=xxxx;wskey=xxxx;
+# 注意分号 不要用中文分号!
+变量名: QL_PORT 参数: 端口号(int) 
+# 修改过面板端口的人才需要填写 默认 5700 
+# 是本地的端口 不是 Docker 映射出去的端口! 如果你映射参数是 8888:5700 仍然填写5700
+变量名: QL_WSCK 参数: 任意(str)
+# 设置 QL_WSCK变量后 不检查有效性 直接更新 不使用请删除 而不是禁用
+变量名: WSKEY_AUTO_DISABLE 参数: 任意(str)	
+# 设置 WSKEY_AUTO_DISABLE变量后 不会自动禁用变量
 ```
 --------------
 ### 程序特点
 
 --------------
 
-1. **使用云端Sign签名 防止固定Sign导致转换失败的问题**
+**1. 云端算法**
 
-2. **支持自定义端口的面板 例如`5800  6666  3721` 对应变量 `export QL_PORT="端口号"`**
+**2. 支持自定义内部端口的面板 例如 `5600  6666  3721` 对应变量 `export QL_PORT="端口号"`**
 
-3. **实时日志效果 无需全部执行完成返回**
+**3. 实时日志效果 无需全部执行完成返回**
 
-4. **HTTP请求冗余机制 错误捕捉机制 最大限度防止出现因为容器没网 403错误 IP拉黑等情况导致脚本错误**
+**4. HTTP错误捕捉 最大限度防止出现因为容器没网 403错误 IP拉黑 等情况导致脚本错误**
 
-5. **智能化**
+**智能化**
 
    > **自动转换 JD_COOKIE 保证账号不过期**
    >
